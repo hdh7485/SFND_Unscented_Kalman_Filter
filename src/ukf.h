@@ -41,6 +41,11 @@ class UKF {
    */
   void UpdateRadar(MeasurementPackage meas_package);
 
+  void initState(const MeasurementPackage &meas_package);
+  void createSigmaPoint();
+  void predictSigmaPoint(const double &delta_t);
+  void predictState();
+
 
   // initially set to false, set to true in first call of ProcessMeasurement
   bool is_initialized_;
@@ -98,6 +103,8 @@ class UKF {
 
   double NIS_lidar_;
   double NIS_radar_;
+
+  Eigen::MatrixXd Xsig_aug_;
 };
 
 #endif  // UKF_H
